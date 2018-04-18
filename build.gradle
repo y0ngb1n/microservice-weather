@@ -44,6 +44,8 @@ dependencies {
 	compile('org.apache.httpcomponents:httpclient')
 	// Redis
 	compile('org.springframework.boot:spring-boot-starter-data-redis')
+	// Quartz
+	compile('org.springframework.boot:spring-boot-starter-quartz')
 
 	// 用于测试阶段
 	testCompile('org.springframework.boot:spring-boot-starter-test')
