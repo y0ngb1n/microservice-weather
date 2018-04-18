@@ -2,3 +2,8 @@
 logging:
   level:
     com.study.*: debug
+
+# Redis
+spring:
+  redis:
+    host: redis
