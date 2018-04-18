@@ -42,6 +42,32 @@ public class WeatherDataServiceImpl implements WeatherDataService {
         return this.getWeatherData(url);
     }
 
+    @Override
+    public void syncWeatherDataByCityId(String cityId) {
+        String url = String.format("%s%s%s", WEATHER_PROVIDER_URL, "citykey=", cityId);
+        saveWeatherData(url);
+    }
+
+    /**
+     * 保存天气数据.
+     *
+     * @param url
+     */
+    private void saveWeatherData(String url) {
+        String cacheKey = buildWeatherDataCacheKeyByUrl(url);
+        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
+        String json;
+
+        log.debug("【保存天气数据】正在请求：{}", url);
+        // 获取天气数据
+        ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
+        if (entity.getStatusCode() == HttpStatus.OK) {
+            json = entity.getBody();
+            // 将数据写入缓存
+            ops.set(cacheKey, json, CACHE_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        }
+    }
+
     /**
      * 获取天气数据.
      *
@@ -49,8 +75,7 @@ public class WeatherDataServiceImpl implements WeatherDataService {
      * @return WeatherResponse
      */
     private WeatherResponse getWeatherData(String url) {
-        String cacheKey = String.format("weather:data:%s",
-                url.replace(WEATHER_PROVIDER_URL, "").replace('=', ':'));
+        String cacheKey = buildWeatherDataCacheKeyByUrl(url);
         ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
         String json = null;
         WeatherResponse weatherResponse = null;
@@ -80,5 +105,16 @@ public class WeatherDataServiceImpl implements WeatherDataService {
             log.error("【获取天气数据】无法获取天气数据：{}", e);
         }
         return weatherResponse;
+    }
+
+    /**
+     * 根据URL构建天气数据的缓存Key.
+     *
+     * @param url
+     * @return 缓存Key.
+     */
+    private String buildWeatherDataCacheKeyByUrl(String url) {
+        return String.format("weather:data:%s",
+                url.replace(WEATHER_PROVIDER_URL, "").replace('=', ':'));
     }
 }
