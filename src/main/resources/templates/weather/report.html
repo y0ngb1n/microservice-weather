@@ -2,32 +2,82 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>天气预报</title>
 </head>
-<body>
-<h3 th:text="${weatherReport.title}">天气预报</h3>
-<select>
-    <option th:each="city : ${weatherReport.cityList}" th:value="${city.id}" th:text="${city.name}"
-            th:selected="${weatherReport.cityId eq city.id}"></option>
-</select>
-<h1 th:text="${weatherReport.report.city}">城市名称</h1>
-<p>
-    空气质量指数：<span th:text="${weatherReport.report.aqi}"></span>
-</p>
-<p>
-    当前温度：<span th:text="${weatherReport.report.wendu}"></span>
-</p>
-<p>
-    温馨提示：<span th:text="${weatherReport.report.ganmao}"></span>
-</p>
-<div th:each="forecast : ${weatherReport.report.forecast}">
-    <div>
-        <p th:text="${forecast.date}">日期</p>
-        <p th:text="${forecast.type}">天气类型</p>
-        <p th:text="${forecast.high}">最高温度</p>
-        <p th:text="${forecast.low}">最低温度</p>
-        <p th:text="${forecast.fengxiang}">风向</p>
+<body style="font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif">
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1" th:text="${'⛅ ' + weatherReport.title}">天气预报</span>
+        <div>
+            <select class="custom-select" id="select-city-id">
+                <option th:each="city : ${weatherReport.cityList}" th:value="${city.id}" th:text="${city.name}"
+                        th:selected="${weatherReport.cityId eq city.id}"></option>
+            </select>
+        </div>
     </div>
+</nav>
+<div class="container">
+    <!-- 今天天气 -->
+    <div id="today" style="margin: 35px 0">
+        <div class="text-center">
+            <h1 class="text-primary" th:text="${weatherReport.report.city}">城市名称</h1>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <span>当前温度</span>
+                    <span class="h4" th:text="${weatherReport.report.wendu}"></span>
+                    <span> ℃,</span>
+                </li>
+                <li class="list-inline-item">
+                    <span>空气质量指数</span>
+                    <span class="h4" th:text="${weatherReport.report.aqi}"></span>
+                    <span>。</span>
+                </li>
+            </ul>
+            <p class="h5" th:text="${weatherReport.report.ganmao}">温馨提示</p>
+        </div>
+    </div>
+    <!-- 未来几天的天气 -->
+    <div id="future">
+        <div class="row">
+            <div class="card-group" style="margin: 0 auto">
+                <div class="card text-center" style="width: 18rem" th:each="forecast : ${weatherReport.report.forecast}">
+                    <img class="card-img-top" style="height: 200px; width: 100%; display: block;"
+                         th:data-src="'holder.js/100px200/?random=yes&size=20&text=' + ${forecast.type}" th:alt="${forecast.type}">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${forecast.date.replace('日',' 日, ')}">日期</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <span th:text="${forecast.type}">天气类型</span>
+                            ，<span th:text="${forecast.fengxiang}">风向</span>
+                        </h6>
+                        <ul class="list-unstyled card-text">
+                            <li>
+                                <span th:text="${forecast.high}">最高温度</span>
+                                ，<span th:text="${forecast.low}">最低温度</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 脚注 -->
+    <footer style="margin-top: 25px">
+        <blockquote class="blockquote text-right">
+            <footer class="blockquote-footer text-uppercase">power by 杨斌，数据来源于 <cite title="Source">etouch.cn</cite></footer>
+        </blockquote>
+    </footer>
 </div>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- holder.js -->
+<script src="https://cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
+
+<script th:src="@{/js/weather/report.js}"></script>
 </body>
 </html>
