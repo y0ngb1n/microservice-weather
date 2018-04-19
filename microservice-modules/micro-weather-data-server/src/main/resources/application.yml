@@ -1,0 +1,12 @@
+server:
+  port: 8082
+
+# 日志
+logging:
+  level:
+    per.study.*: debug
+
+spring:
+  ## Redis
+  redis:
+    host: redis
