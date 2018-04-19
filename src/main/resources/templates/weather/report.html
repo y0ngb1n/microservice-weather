@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天气预报</title>
+</head>
+<body>
+<h3 th:text="${weatherReport.title}">天气预报</h3>
+<select>
+    <option th:each="city : ${weatherReport.cityList}" th:value="${city.id}" th:text="${city.name}"
+            th:selected="${weatherReport.cityId eq city.id}"></option>
+</select>
+<h1 th:text="${weatherReport.report.city}">城市名称</h1>
+<p>
+    空气质量指数：<span th:text="${weatherReport.report.aqi}"></span>
+</p>
+<p>
+    当前温度：<span th:text="${weatherReport.report.wendu}"></span>
+</p>
+<p>
+    温馨提示：<span th:text="${weatherReport.report.ganmao}"></span>
+</p>
+<div th:each="forecast : ${weatherReport.report.forecast}">
+    <div>
+        <p th:text="${forecast.date}">日期</p>
+        <p th:text="${forecast.type}">天气类型</p>
+        <p th:text="${forecast.high}">最高温度</p>
+        <p th:text="${forecast.low}">最低温度</p>
+        <p th:text="${forecast.fengxiang}">风向</p>
+    </div>
+</div>
+</body>
+</html>

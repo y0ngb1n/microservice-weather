@@ -3,7 +3,11 @@ logging:
   level:
     com.study.*: debug
 
-# Redis
 spring:
+  ## Redis
   redis:
     host: redis
+
+  ## Thymeleaf
+  thymeleaf:
+    cache: true
