@@ -1,0 +1,13 @@
+# 日志
+logging:
+  level:
+    com.study.*: debug
+
+spring:
+  ## Redis
+  redis:
+    host: redis
+
+  ## Thymeleaf
+  thymeleaf:
+    cache: true
