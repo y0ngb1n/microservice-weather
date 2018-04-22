@@ -1,0 +1,11 @@
+server:
+  port: 8181
+
+spring:
+  application:
+    name: micro-weather-eureka-client
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://weather-eureka:8761/eureka/
