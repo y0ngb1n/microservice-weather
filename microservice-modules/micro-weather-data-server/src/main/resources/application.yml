@@ -7,6 +7,13 @@ logging:
     per.study.*: debug
 
 spring:
+  application:
+    name: micro-weather-data-server
   ## Redis
   redis:
     host: redis
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://weather-eureka:8761/eureka/

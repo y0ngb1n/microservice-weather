@@ -5,3 +5,12 @@ server:
 logging:
   level:
     per.study.*: debug
+
+spring:
+  application:
+    name: micro-weather-report-server
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://weather-eureka:8761/eureka/

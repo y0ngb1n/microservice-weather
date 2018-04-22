@@ -27,11 +27,22 @@ repositories {
     maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
 }
 
+ext {
+    springCloudVersion = 'Finchley.M9'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     // Lombok
     compileOnly('org.projectlombok:lombok')
+    // Eureka Client
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
