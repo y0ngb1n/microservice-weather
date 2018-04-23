@@ -14,3 +14,12 @@ eureka:
   client:
     service-url:
       default-zone: http://weather-eureka:8761/eureka/
+
+feign:
+  client:
+    config:
+      feign-name:
+        connect-timeout: 5000
+        read-timeout: 5000
+  hystrix:
+    enabled: true

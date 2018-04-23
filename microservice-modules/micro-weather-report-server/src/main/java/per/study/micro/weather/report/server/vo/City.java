@@ -1,5 +1,6 @@
 package per.study.micro.weather.report.server.vo;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Data;
  * @author yangbin
  **/
 @Data
+@Builder
 public class City {
     /** 城市ID. **/
     private String id;

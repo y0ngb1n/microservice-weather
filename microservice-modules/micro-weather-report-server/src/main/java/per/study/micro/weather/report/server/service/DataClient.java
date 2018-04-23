@@ -3,6 +3,7 @@ package per.study.micro.weather.report.server.service;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import per.study.micro.weather.report.server.service.impl.DataClientFallback;
 import per.study.micro.weather.report.server.vo.City;
 import per.study.micro.weather.report.server.vo.WeatherResponse;
 
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * @author yangbin
  **/
-@FeignClient("micro-weather-gateway-zuul")
+@FeignClient(name = "micro-weather-gateway-zuul", fallback = DataClientFallback.class)
 public interface DataClient {
 
     /** 获取城市列表. */

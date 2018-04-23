@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,7 +19,16 @@
         </div>
     </div>
 </nav>
-<div class="container">
+<!-- 服务不可用 -->
+<div class="container" th:if="${weatherReport.report == null}">
+    <div style="margin: 120px 0">
+        <div class="text-center">
+            <h2 class="text-danger">📢 服务暂不可用，请稍后再试...</h2>
+        </div>
+    </div>
+</div>
+<!-- 服务正常 -->
+<div class="container" th:if="${weatherReport.report != null}">
     <!-- 今天天气 -->
     <div id="today" style="margin: 35px 0">
         <div class="text-center">
@@ -63,6 +72,8 @@
             </div>
         </div>
     </div>
+</div>
+<div class="container">
     <!-- 脚注 -->
     <footer style="margin-top: 25px">
         <blockquote class="blockquote text-right">

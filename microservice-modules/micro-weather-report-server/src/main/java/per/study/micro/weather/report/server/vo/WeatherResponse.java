@@ -1,5 +1,6 @@
 package per.study.micro.weather.report.server.vo;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * @author yangbin
  **/
 @Data
+@Builder
 public class WeatherResponse implements Serializable {
     /** 天气数据. **/
     private Weather data;
