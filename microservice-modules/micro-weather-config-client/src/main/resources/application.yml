@@ -1,0 +1,15 @@
+server:
+  port: 9998
+
+spring:
+  application:
+    name: micro-weather-config-client
+  cloud:
+    config:
+      profile: dev
+      uri: http://localhost:9999
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://weather-eureka:8761/eureka/
