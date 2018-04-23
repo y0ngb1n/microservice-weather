@@ -49,6 +49,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-quartz')
     // Eureka Client
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+    // Feign
+    compile('org.springframework.cloud:spring-cloud-starter-openfeign')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

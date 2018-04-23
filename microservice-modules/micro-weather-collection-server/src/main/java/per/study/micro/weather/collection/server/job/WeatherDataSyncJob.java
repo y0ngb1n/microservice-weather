@@ -5,10 +5,10 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
+import per.study.micro.weather.collection.server.service.CityClient;
 import per.study.micro.weather.collection.server.service.WeatherDataCollectionService;
 import per.study.micro.weather.collection.server.vo.City;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,6 +21,8 @@ public class WeatherDataSyncJob extends QuartzJobBean {
 
     @Autowired
     private WeatherDataCollectionService weatherDataCollectionService;
+@Autowired
+private CityClient cityClient;
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
@@ -29,12 +31,7 @@ public class WeatherDataSyncJob extends QuartzJobBean {
         // 1. 获取城市ID列表.
         List<City> cityList;
         try {
-
-            // TODO 从城市数据API微服务获取城市数据
-
-            City city = new City();
-            city.setId("101282001");
-            cityList= Collections.singletonList(city);
+            cityList = cityClient.listCity();
         } catch (Exception e) {
             log.error("【定时同步天气数据】获取城市ID列表失败", e);
             throw new JobExecutionException(e);
