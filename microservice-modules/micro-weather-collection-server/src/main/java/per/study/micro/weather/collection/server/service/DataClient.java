@@ -9,9 +9,9 @@ import java.util.List;
 /**
  * @author yangbin
  **/
-@FeignClient("micro-weather-city-server")
-public interface CityClient {
+@FeignClient("micro-weather-gateway-zuul")
+public interface DataClient {
 
-    @GetMapping("/cities")
+    @GetMapping("/city/cities")
     List<City> listCity() throws Exception;
 }
