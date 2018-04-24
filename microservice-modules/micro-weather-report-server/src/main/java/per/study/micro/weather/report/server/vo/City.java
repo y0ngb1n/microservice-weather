@@ -1,7 +1,9 @@
 package per.study.micro.weather.report.server.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 城市信息.
@@ -10,6 +12,8 @@ import lombok.Data;
  **/
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class City {
     /** 城市ID. **/
     private String id;
