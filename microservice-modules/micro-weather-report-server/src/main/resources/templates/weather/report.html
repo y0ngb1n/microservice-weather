@@ -20,7 +20,7 @@
     </div>
 </nav>
 <!-- 服务不可用 -->
-<div class="container" th:if="${weatherReport.report == null}">
+<div class="container" th:if="${weatherReport.report} == null">
     <div style="margin: 120px 0">
         <div class="text-center">
             <h2 class="text-danger">📢 服务暂不可用，请稍后再试...</h2>
@@ -28,7 +28,7 @@
     </div>
 </div>
 <!-- 服务正常 -->
-<div class="container" th:if="${weatherReport.report != null}">
+<div class="container" th:if="${weatherReport.report} != null">
     <!-- 今天天气 -->
     <div id="today" style="margin: 35px 0">
         <div class="text-center">
